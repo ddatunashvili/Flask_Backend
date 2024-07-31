@@ -1,0 +1,12 @@
+flask_app/
+│
+├── app.py
+├── templates/
+│   ├── base.html
+│   └── home.html
+└── static/
+    ├── css/
+    │   └── style.css
+    └── js/
+        └── script.js
+
