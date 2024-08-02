@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Register Users</h1>
+
+    <form action="{{ url_for('add_user') }}" method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="number" name="age" placeholder="Age" required>
+        <input type="text" name="image" placeholder="Image URL" required>
+        <button type="submit">Add User</button>
+    </form>
+
+    <h2>Modify Users</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.age }}</td>
+                <td><img src="{{ user.image }}" alt="{{ user.name }}" width="250"></td>
+                <td>
+                    <form action="{{ url_for('update_user', user_id=user._id) }}" method="POST" style="display:inline;">
+                        <input type="text" name="name" value="{{ user.name }}" required>
+                        <input type="email" name="email" value="{{ user.email }}" required>
+                        <input type="number" name="age" value="{{ user.age }}" required>
+                        <input type="text" name="image" value="{{ user.image }}" required>
+                        <button type="submit">Update</button>
+                    </form>
+                    <form action="{{ url_for('delete_user', user_id=user._id) }}" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+</body>
+
+</html>
